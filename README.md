@@ -40,7 +40,7 @@ Bundle your favorite extensions together and share them with a single URL. No ac
 Packs are encoded directly in the URL hash:
 
 ```
-https://extension-pack-hub.github.io/#eyJuYW1lIjoiUHJpdmFjeSBQYWNrIi4uLn0
+https://ifaka.github.io/extension-pack-hub/#eyJuYW1lIjoiUHJpdmFjeSBQYWNrIi4uLn0
 ```
 
 ### Manifest Schema
@@ -123,7 +123,7 @@ extension-pack-hub/
 │   └── lib/                   # Shared utilities
 │       ├── pack-codec.js      # URL encoding/decoding
 │       └── github-api.js      # GitHub API client
-├── website/                   # Static site (GitHub Pages)
+├── docs/                      # Static site (GitHub Pages)
 │   ├── index.html
 │   ├── styles.css
 │   └── app.js
@@ -138,10 +138,14 @@ The static website serves as:
 - **Pack viewer** when URL contains a pack hash
 - **Fallback** for users without the extension
 
+### Live Site
+
+**[https://ifaka.github.io/extension-pack-hub/](https://ifaka.github.io/extension-pack-hub/)**
+
 ### Run Locally
 
 ```bash
-cd website
+cd docs
 python -m http.server 8000
 # Open http://localhost:8000
 ```
@@ -167,7 +171,7 @@ git clone https://github.com/IFAKA/extension-pack-hub.git
 # chrome://extensions → Load unpacked → select extension/
 
 # Run website locally
-cd website && python -m http.server 8000
+cd docs && python -m http.server 8000
 ```
 
 ## 📋 Roadmap

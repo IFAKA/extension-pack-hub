@@ -29,7 +29,7 @@ const PackCodec = {
   /**
    * Generate a full shareable URL for a pack
    */
-  generateUrl(pack, baseUrl = 'https://extension-packs.github.io') {
+  generateUrl(pack, baseUrl = 'https://ifaka.github.io/extension-pack-hub') {
     const encoded = this.encode(pack);
     return `${baseUrl}/#${encoded}`;
   },
