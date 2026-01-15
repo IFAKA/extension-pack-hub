@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Extension Pack Hub</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Extension Pack Hub</h1>
+      <nav class="tabs">
+        <button class="tab active" data-tab="create">Create Pack</button>
+        <button class="tab" data-tab="import">Import Pack</button>
+        <button class="tab" data-tab="my-packs">My Packs</button>
+      </nav>
+    </header>
+
+    <!-- Create Pack Tab -->
+    <section id="create" class="tab-content active">
+      <div class="pack-form">
+        <input type="text" id="pack-name" placeholder="Pack name (e.g., Privacy Essentials)">
+        <textarea id="pack-description" placeholder="Description (optional)"></textarea>
+        <input type="text" id="pack-author" placeholder="Your name (optional)">
+      </div>
+
+      <div class="section-header">
+        <h3>Your Extensions</h3>
+        <input type="text" id="search-extensions" placeholder="Search...">
+      </div>
+
+      <div id="extension-list" class="extension-list">
+        <div class="loading">Loading extensions...</div>
+      </div>
+
+      <div class="actions">
+        <button id="create-pack" class="primary" disabled>Create Pack</button>
+        <span id="selected-count">0 selected</span>
+      </div>
+
+      <div id="share-result" class="share-result hidden">
+        <p>Pack created! Share this URL:</p>
+        <div class="url-box">
+          <input type="text" id="share-url" readonly>
+          <button id="copy-url">Copy</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Import Pack Tab -->
+    <section id="import" class="tab-content">
+      <div class="import-form">
+        <input type="text" id="import-url" placeholder="Paste pack URL here...">
+        <button id="import-pack">Import</button>
+      </div>
+
+      <div id="imported-pack" class="imported-pack hidden">
+        <div class="pack-header">
+          <h3 id="imported-pack-name"></h3>
+          <p id="imported-pack-description"></p>
+          <span id="imported-pack-author"></span>
+        </div>
+
+        <div id="imported-extension-list" class="extension-list"></div>
+
+        <div class="actions">
+          <button id="install-missing" class="primary">Install Missing</button>
+          <span id="install-status"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- My Packs Tab -->
+    <section id="my-packs" class="tab-content">
+      <div id="saved-packs" class="saved-packs">
+        <p class="empty-state">No saved packs yet. Create or import a pack to get started.</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="../lib/pack-codec.js"></script>
+  <script src="../lib/github-api.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

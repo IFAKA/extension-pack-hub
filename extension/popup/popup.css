@@ -1,0 +1,442 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  color: #1a1a1a;
+  background: #fff;
+  width: 400px;
+  min-height: 500px;
+}
+
+.container {
+  padding: 16px;
+}
+
+header {
+  margin-bottom: 16px;
+}
+
+header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 8px;
+}
+
+.tab {
+  padding: 8px 12px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: #666;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.tab:hover {
+  background: #f5f5f5;
+}
+
+.tab.active {
+  background: #e8f0fe;
+  color: #1a73e8;
+  font-weight: 500;
+}
+
+/* Tab Content */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Forms */
+.pack-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+input[type="text"],
+textarea {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: #1a73e8;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+/* Section Header */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.section-header h3 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.section-header input {
+  width: 150px;
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+/* Extension List */
+.extension-list {
+  max-height: 250px;
+  overflow-y: auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.extension-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.extension-item:last-child {
+  border-bottom: none;
+}
+
+.extension-item:hover {
+  background: #f8f9fa;
+}
+
+.extension-item.selected {
+  background: #e8f0fe;
+}
+
+.extension-item input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.extension-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+
+.extension-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.extension-name {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.extension-meta {
+  font-size: 11px;
+  color: #666;
+  margin-top: 2px;
+}
+
+.extension-type {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.extension-type.store {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.extension-type.github {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.extension-type.local {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+/* Status badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.status-badge.installed {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-badge.missing {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.status-badge.warning {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+button.primary {
+  background: #1a73e8;
+  color: white;
+}
+
+button.primary:hover:not(:disabled) {
+  background: #1557b0;
+}
+
+button.primary:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+button.secondary {
+  background: #f1f3f4;
+  color: #3c4043;
+}
+
+button.secondary:hover {
+  background: #e8eaed;
+}
+
+#selected-count {
+  font-size: 12px;
+  color: #666;
+}
+
+/* Share Result */
+.share-result {
+  background: #e8f5e9;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.share-result p {
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #2e7d32;
+}
+
+.url-box {
+  display: flex;
+  gap: 8px;
+}
+
+.url-box input {
+  flex: 1;
+  font-family: monospace;
+  font-size: 12px;
+}
+
+.url-box button {
+  padding: 8px 12px;
+}
+
+/* Import Form */
+.import-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.import-form input {
+  flex: 1;
+}
+
+/* Imported Pack */
+.imported-pack {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.pack-header {
+  margin-bottom: 12px;
+}
+
+.pack-header h3 {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.pack-header p {
+  color: #666;
+  font-size: 13px;
+}
+
+.pack-header span {
+  font-size: 12px;
+  color: #999;
+}
+
+/* Saved Packs */
+.saved-packs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.saved-pack-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.saved-pack-item:hover {
+  background: #f8f9fa;
+}
+
+.saved-pack-info h4 {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.saved-pack-info span {
+  font-size: 12px;
+  color: #666;
+}
+
+.saved-pack-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.saved-pack-actions button {
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+}
+
+/* Loading */
+.loading {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+}
+
+/* Hidden */
+.hidden {
+  display: none !important;
+}
+
+/* Warnings */
+.warning-list {
+  margin-top: 8px;
+  padding: 8px;
+  background: #fff3e0;
+  border-radius: 6px;
+}
+
+.warning-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 4px 0;
+  font-size: 12px;
+  color: #e65100;
+}
+
+.warning-item::before {
+  content: "⚠️";
+}
+
+/* Install Progress */
+.install-progress {
+  margin-top: 12px;
+  padding: 12px;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+.progress-bar {
+  height: 4px;
+  background: #e0e0e0;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #1a73e8;
+  transition: width 0.3s;
+}
+
+.progress-text {
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+}

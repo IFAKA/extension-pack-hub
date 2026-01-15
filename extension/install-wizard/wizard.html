@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Install Extension - Extension Pack Hub</title>
+  <link rel="stylesheet" href="wizard.css">
+</head>
+<body>
+  <div class="wizard-container">
+    <header>
+      <h1>Install Extension from GitHub</h1>
+      <p id="extension-name" class="extension-name"></p>
+    </header>
+
+    <div class="steps">
+      <!-- Step 1: Download -->
+      <div class="step active" id="step-1">
+        <div class="step-header">
+          <span class="step-number">1</span>
+          <h2>Download Extension</h2>
+        </div>
+        <div class="step-content">
+          <p>Downloading the extension from GitHub...</p>
+          <div class="progress-container">
+            <div class="progress-bar">
+              <div class="progress-fill" id="download-progress"></div>
+            </div>
+            <p class="progress-text" id="download-status">Fetching release info...</p>
+          </div>
+          <div id="download-error" class="error-message hidden"></div>
+          <div id="download-success" class="success-message hidden">
+            <p>Download complete!</p>
+            <button id="continue-to-step-2" class="primary">Continue</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Open Extensions Page -->
+      <div class="step" id="step-2">
+        <div class="step-header">
+          <span class="step-number">2</span>
+          <h2>Open Extensions Page</h2>
+        </div>
+        <div class="step-content">
+          <p>Click the button below to open Chrome's extensions page:</p>
+          <button id="open-extensions" class="primary">Open chrome://extensions</button>
+          <div class="instruction-image">
+            <div class="placeholder-image">
+              <svg width="100" height="80" viewBox="0 0 100 80">
+                <rect width="100" height="80" fill="#f5f5f5" rx="4"/>
+                <text x="50" y="45" text-anchor="middle" fill="#999" font-size="12">Extensions Page</text>
+              </svg>
+            </div>
+          </div>
+          <button id="continue-to-step-3" class="secondary">I've opened it, continue</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Enable Developer Mode -->
+      <div class="step" id="step-3">
+        <div class="step-header">
+          <span class="step-number">3</span>
+          <h2>Enable Developer Mode</h2>
+        </div>
+        <div class="step-content">
+          <p>Toggle the "Developer mode" switch in the top-right corner:</p>
+          <div class="instruction-image">
+            <div class="toggle-demo">
+              <span>Developer mode</span>
+              <div class="toggle off">
+                <div class="toggle-handle"></div>
+              </div>
+              <span class="arrow">→</span>
+              <div class="toggle on">
+                <div class="toggle-handle"></div>
+              </div>
+            </div>
+          </div>
+          <button id="continue-to-step-4" class="secondary">Done, continue</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Load Unpacked -->
+      <div class="step" id="step-4">
+        <div class="step-header">
+          <span class="step-number">4</span>
+          <h2>Load the Extension</h2>
+        </div>
+        <div class="step-content">
+          <p>1. Click the "Load unpacked" button that appeared</p>
+          <p>2. Navigate to your Downloads folder</p>
+          <p>3. Select the extracted extension folder</p>
+
+          <div class="path-box">
+            <label>Extension folder path:</label>
+            <div class="path-input">
+              <input type="text" id="extension-path" readonly>
+              <button id="copy-path">Copy</button>
+            </div>
+          </div>
+
+          <div class="note">
+            <strong>Note:</strong> You may need to extract the downloaded ZIP file first.
+            Look for a folder named after the extension in your Downloads.
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 5: Complete -->
+      <div class="step" id="step-5">
+        <div class="step-header">
+          <span class="step-number">✓</span>
+          <h2>Installation Complete!</h2>
+        </div>
+        <div class="step-content">
+          <p class="success-text">The extension should now be installed and active.</p>
+          <p>You can close this tab and return to Extension Pack Hub.</p>
+          <button id="close-wizard" class="primary">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="warnings" id="warnings-container"></div>
+  </div>
+
+  <script src="../lib/github-api.js"></script>
+  <script src="wizard.js"></script>
+</body>
+</html>
