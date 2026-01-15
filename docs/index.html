@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Extension Pack Hub</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📦</text></svg>">
@@ -10,106 +10,119 @@
 <body>
   <div class="container">
     <!-- Landing View (no pack in URL) -->
-    <div id="landing" class="view">
+    <div id="landing" class="view active">
       <header>
-        <h1>Extension Pack Hub</h1>
+        <h1>📦 Extension Pack Hub</h1>
         <p class="tagline">Create, share, and install browser extension packs</p>
       </header>
 
-      <div class="hero">
-        <div class="hero-content">
-          <h2>Like modpacks, but for your browser</h2>
-          <p>Bundle your favorite extensions together and share them with a single link.</p>
+      <div class="main-content">
+        <div class="hero">
+          <div class="hero-content">
+            <h2>Like modpacks, but for your browser</h2>
+            <p>Bundle your favorite extensions together and share them with a single link.</p>
 
-          <div class="features">
-            <div class="feature">
-              <span class="feature-icon">🎯</span>
-              <h3>Create Packs</h3>
-              <p>Select from your installed extensions and create a shareable pack</p>
+            <div class="features">
+              <div class="feature">
+                <span class="feature-icon">🎯</span>
+                <h3>Create Packs</h3>
+                <p>Select from your installed extensions and create a shareable pack</p>
+              </div>
+              <div class="feature">
+                <span class="feature-icon">🔗</span>
+                <h3>Share Easily</h3>
+                <p>Everything is encoded in the URL — no accounts needed</p>
+              </div>
+              <div class="feature">
+                <span class="feature-icon">🔒</span>
+                <h3>Stay Safe</h3>
+                <p>Store extensions verified by Chrome, GitHub ones are open source</p>
+              </div>
             </div>
-            <div class="feature">
-              <span class="feature-icon">🔗</span>
-              <h3>Share Easily</h3>
-              <p>Everything is encoded in the URL - no accounts needed</p>
-            </div>
-            <div class="feature">
-              <span class="feature-icon">🔒</span>
-              <h3>Stay Safe</h3>
-              <p>Store extensions are verified by Chrome, GitHub extensions are open source</p>
+
+            <div class="cta">
+              <a href="https://github.com/IFAKA/extension-pack-hub" target="_blank" class="btn primary">Get the Extension</a>
+              <p class="cta-note">Required to create packs</p>
             </div>
           </div>
+        </div>
 
-          <div class="cta">
-            <a href="#" class="btn primary" id="get-extension">Get the Extension</a>
-            <p class="cta-note">Required to create packs</p>
+        <div class="import-section">
+          <h2>Have a pack URL?</h2>
+          <div class="import-form">
+            <input type="text" id="import-url-input" placeholder="Paste pack URL here...">
+            <button id="load-pack" class="btn secondary">Load Pack</button>
           </div>
         </div>
       </div>
 
-      <div class="import-section">
-        <h2>Have a pack URL?</h2>
-        <div class="import-form">
-          <input type="text" id="import-url-input" placeholder="Paste pack URL here...">
-          <button id="load-pack" class="btn secondary">Load Pack</button>
-        </div>
-      </div>
+      <footer>
+        <p>Open Source on <a href="https://github.com/IFAKA/extension-pack-hub" target="_blank">GitHub</a></p>
+      </footer>
     </div>
 
     <!-- Pack View (pack in URL) -->
-    <div id="pack-view" class="view hidden">
+    <div id="pack-view" class="view">
       <header>
         <a href="./" class="back-link">← Extension Pack Hub</a>
       </header>
 
-      <div class="pack-card">
-        <div class="pack-header">
-          <h1 id="pack-name"></h1>
-          <p id="pack-description"></p>
-          <span id="pack-author" class="author"></span>
+      <div class="main-content">
+        <div class="pack-card">
+          <div class="pack-header">
+            <h1 id="pack-name"></h1>
+            <p id="pack-description"></p>
+            <span id="pack-author" class="author"></span>
+          </div>
+
+          <div class="pack-stats">
+            <span id="extension-count"></span>
+            <span id="pack-created"></span>
+          </div>
+
+          <div class="extension-list" id="extension-list"></div>
+
+          <div class="pack-actions">
+            <button id="install-all" class="btn primary">Install All Extensions</button>
+            <div class="divider"><span>opens Chrome Web Store pages</span></div>
+            <a href="https://github.com/IFAKA/extension-pack-hub" target="_blank" class="btn secondary">Get Companion Extension</a>
+          </div>
         </div>
 
-        <div class="pack-stats">
-          <span id="extension-count"></span>
-          <span id="pack-created"></span>
-        </div>
+        <div id="warnings" class="warnings hidden"></div>
 
-        <div class="extension-list" id="extension-list"></div>
-
-        <div class="pack-actions">
-          <div class="companion-prompt">
-            <p>For the best experience, get the Extension Pack Hub companion extension:</p>
-            <a href="#" class="btn primary" id="get-companion">Get Companion Extension</a>
+        <div class="share-section">
+          <h3>Share this pack</h3>
+          <div class="share-url">
+            <input type="text" id="share-url" readonly>
+            <button id="copy-url" class="btn secondary">Copy</button>
           </div>
-          <div class="divider">
-            <span>or install manually</span>
-          </div>
-          <button id="install-all" class="btn secondary">Install All (opens store pages)</button>
         </div>
       </div>
 
-      <div id="warnings" class="warnings hidden"></div>
-
-      <div class="share-section">
-        <h3>Share this pack</h3>
-        <div class="share-url">
-          <input type="text" id="share-url" readonly>
-          <button id="copy-url" class="btn">Copy</button>
-        </div>
-      </div>
+      <footer>
+        <p>Open Source on <a href="https://github.com/IFAKA/extension-pack-hub" target="_blank">GitHub</a></p>
+      </footer>
     </div>
 
     <!-- Error View -->
-    <div id="error-view" class="view hidden">
-      <div class="error-card">
-        <h1>Invalid Pack</h1>
-        <p id="error-message">The pack URL appears to be invalid or corrupted.</p>
-        <a href="./" class="btn primary">Go Home</a>
-      </div>
-    </div>
+    <div id="error-view" class="view">
+      <header>
+        <a href="./" class="back-link">← Extension Pack Hub</a>
+      </header>
 
-    <footer>
-      <p>Extension Pack Hub - Open Source on <a href="https://github.com/extension-packs/hub" target="_blank">GitHub</a></p>
-    </footer>
+      <div class="main-content" style="justify-content: center;">
+        <div class="error-card">
+          <h1>Invalid Pack</h1>
+          <p id="error-message">The pack URL appears to be invalid or corrupted.</p>
+          <a href="./" class="btn primary">Go Home</a>
+        </div>
+      </div>
+
+      <footer>
+        <p>Open Source on <a href="https://github.com/IFAKA/extension-pack-hub" target="_blank">GitHub</a></p>
+      </footer>
+    </div>
   </div>
 
   <script src="app.js"></script>

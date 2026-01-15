@@ -115,21 +115,21 @@ function setupEventListeners() {
 }
 
 function showLanding() {
-  document.getElementById('landing').classList.remove('hidden');
-  document.getElementById('pack-view').classList.add('hidden');
-  document.getElementById('error-view').classList.add('hidden');
+  document.getElementById('landing').classList.add('active');
+  document.getElementById('pack-view').classList.remove('active');
+  document.getElementById('error-view').classList.remove('active');
 }
 
 function showPackView() {
-  document.getElementById('landing').classList.add('hidden');
-  document.getElementById('pack-view').classList.remove('hidden');
-  document.getElementById('error-view').classList.add('hidden');
+  document.getElementById('landing').classList.remove('active');
+  document.getElementById('pack-view').classList.add('active');
+  document.getElementById('error-view').classList.remove('active');
 }
 
 function showError(message) {
-  document.getElementById('landing').classList.add('hidden');
-  document.getElementById('pack-view').classList.add('hidden');
-  document.getElementById('error-view').classList.remove('hidden');
+  document.getElementById('landing').classList.remove('active');
+  document.getElementById('pack-view').classList.remove('active');
+  document.getElementById('error-view').classList.add('active');
   document.getElementById('error-message').textContent = message;
 }
 
