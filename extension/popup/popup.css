@@ -462,3 +462,149 @@ button.secondary:hover {
   color: #666;
   text-align: center;
 }
+
+/* Enhanced Extension Item Styles */
+.extension-item {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.extension-item.selected {
+  background: #e8f0fe;
+  border-left: 3px solid #1a73e8;
+  padding-left: 9px;
+}
+
+.extension-item.selected .extension-name {
+  color: #1a73e8;
+}
+
+/* Checkbox styling */
+.extension-item input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  margin-right: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.extension-item input[type="checkbox"]:checked {
+  background: #1a73e8;
+  border-color: #1a73e8;
+}
+
+.extension-item input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Success Animation */
+@keyframes successPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.share-result {
+  animation: successPulse 0.3s ease;
+}
+
+/* Button improvements */
+button.primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+button.primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Tab improvements */
+.tab {
+  position: relative;
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 3px;
+  background: #1a73e8;
+  border-radius: 2px;
+}
+
+/* Scrollbar styling */
+.extension-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.extension-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.extension-list::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 3px;
+}
+
+.extension-list::-webkit-scrollbar-thumb:hover {
+  background: #ccc;
+}
+
+/* Pack info improvements */
+#install-status {
+  font-weight: 500;
+}
+
+/* Tooltip styling */
+[title] {
+  position: relative;
+}
+
+/* Quick actions */
+.quick-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.quick-action-btn {
+  flex: 1;
+  padding: 8px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Header branding */
+header h1 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+header h1::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background: #1a73e8;
+  border-radius: 6px;
+}

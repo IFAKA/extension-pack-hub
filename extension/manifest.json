@@ -12,7 +12,8 @@
   ],
   "host_permissions": [
     "https://api.github.com/*",
-    "https://chrome.google.com/webstore/*"
+    "https://chrome.google.com/webstore/*",
+    "https://raw.githubusercontent.com/*"
   ],
   "action": {
     "default_popup": "popup/popup.html",
@@ -29,5 +30,21 @@
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://ifaka.github.io/extension-pack-hub/*"],
+      "js": ["content/website-bridge.js"],
+      "run_at": "document_start"
+    }
+  ],
+  "externally_connectable": {
+    "matches": ["https://ifaka.github.io/*"]
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["icons/*"],
+      "matches": ["https://ifaka.github.io/*"]
+    }
+  ]
 }

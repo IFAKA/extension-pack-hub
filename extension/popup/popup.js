@@ -93,16 +93,29 @@ function renderExtensionList(extensions) {
   });
 }
 
-// Get extension type (store, local, github)
+// Get extension type (store, local)
 function getExtensionType(ext) {
-  // Extensions from store have updateUrl pointing to chrome.google.com
-  if (ext.updateUrl && ext.updateUrl.includes('google.com')) {
-    return 'store';
-  }
-  // Unpacked extensions don't have installType 'normal'
+  // Development/unpacked extensions
   if (ext.installType === 'development') {
     return 'local';
   }
+
+  // Extensions installed from Chrome Web Store have updateUrl pointing to google.com
+  if (ext.updateUrl && ext.updateUrl.includes('google.com')) {
+    return 'store';
+  }
+
+  // Sideloaded or externally installed extensions (not from store, not dev)
+  if (ext.installType === 'sideload' || ext.installType === 'admin') {
+    return 'local';
+  }
+
+  // Normal install without google.com updateUrl = likely external/sideloaded
+  if (ext.installType === 'normal' && !ext.updateUrl) {
+    return 'local';
+  }
+
+  // Default to store for normal installs with updateUrl
   return 'store';
 }
 

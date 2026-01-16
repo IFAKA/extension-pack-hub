@@ -9,119 +9,219 @@
 <body>
   <div class="wizard-container">
     <header>
-      <h1>Install Extension from GitHub</h1>
+      <div class="header-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+          <line x1="12" y1="22.08" x2="12" y2="12"></line>
+        </svg>
+      </div>
+      <h1>Installing from GitHub</h1>
       <p id="extension-name" class="extension-name"></p>
     </header>
+
+    <!-- Progress Steps Indicator -->
+    <div class="progress-steps">
+      <div class="progress-step active" data-step="1">
+        <div class="step-dot">1</div>
+        <span>Download</span>
+      </div>
+      <div class="progress-line"></div>
+      <div class="progress-step" data-step="2">
+        <div class="step-dot">2</div>
+        <span>Extract</span>
+      </div>
+      <div class="progress-line"></div>
+      <div class="progress-step" data-step="3">
+        <div class="step-dot">3</div>
+        <span>Install</span>
+      </div>
+      <div class="progress-line"></div>
+      <div class="progress-step" data-step="4">
+        <div class="step-dot">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <span>Done</span>
+      </div>
+    </div>
 
     <div class="steps">
       <!-- Step 1: Download -->
       <div class="step active" id="step-1">
-        <div class="step-header">
-          <span class="step-number">1</span>
-          <h2>Download Extension</h2>
-        </div>
-        <div class="step-content">
-          <p>Downloading the extension from GitHub...</p>
+        <div class="step-card">
+          <div class="step-icon downloading">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+          </div>
+          <h2>Downloading Extension</h2>
+          <p>Fetching the latest release from GitHub...</p>
+
           <div class="progress-container">
             <div class="progress-bar">
               <div class="progress-fill" id="download-progress"></div>
             </div>
-            <p class="progress-text" id="download-status">Fetching release info...</p>
+            <p class="progress-text" id="download-status">Connecting to GitHub...</p>
           </div>
-          <div id="download-error" class="error-message hidden"></div>
+
+          <div id="download-error" class="error-message hidden">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="15" y1="9" x2="9" y2="15"></line>
+              <line x1="9" y1="9" x2="15" y2="15"></line>
+            </svg>
+            <span id="error-text"></span>
+          </div>
+
           <div id="download-success" class="success-message hidden">
-            <p>Download complete!</p>
-            <button id="continue-to-step-2" class="primary">Continue</button>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            <span>Download complete!</span>
+            <button id="continue-to-step-2" class="btn primary">Continue</button>
           </div>
         </div>
       </div>
 
-      <!-- Step 2: Open Extensions Page -->
+      <!-- Step 2: Extract -->
       <div class="step" id="step-2">
-        <div class="step-header">
-          <span class="step-number">2</span>
-          <h2>Open Extensions Page</h2>
-        </div>
-        <div class="step-content">
-          <p>Click the button below to open Chrome's extensions page:</p>
-          <button id="open-extensions" class="primary">Open chrome://extensions</button>
-          <div class="instruction-image">
-            <div class="placeholder-image">
-              <svg width="100" height="80" viewBox="0 0 100 80">
-                <rect width="100" height="80" fill="#f5f5f5" rx="4"/>
-                <text x="50" y="45" text-anchor="middle" fill="#999" font-size="12">Extensions Page</text>
-              </svg>
+        <div class="step-card">
+          <div class="step-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+          </div>
+          <h2>Extract the ZIP File</h2>
+          <p>The extension was downloaded as a ZIP file. You need to extract it first.</p>
+
+          <div class="instruction-box">
+            <div class="instruction-step">
+              <span class="instruction-num">1</span>
+              <span>Open your <strong>Downloads</strong> folder</span>
+            </div>
+            <div class="instruction-step">
+              <span class="instruction-num">2</span>
+              <span>Find the downloaded ZIP file</span>
+            </div>
+            <div class="instruction-step">
+              <span class="instruction-num">3</span>
+              <span><strong>Double-click</strong> to extract (or right-click → Extract)</span>
             </div>
           </div>
-          <button id="continue-to-step-3" class="secondary">I've opened it, continue</button>
-        </div>
-      </div>
-
-      <!-- Step 3: Enable Developer Mode -->
-      <div class="step" id="step-3">
-        <div class="step-header">
-          <span class="step-number">3</span>
-          <h2>Enable Developer Mode</h2>
-        </div>
-        <div class="step-content">
-          <p>Toggle the "Developer mode" switch in the top-right corner:</p>
-          <div class="instruction-image">
-            <div class="toggle-demo">
-              <span>Developer mode</span>
-              <div class="toggle off">
-                <div class="toggle-handle"></div>
-              </div>
-              <span class="arrow">→</span>
-              <div class="toggle on">
-                <div class="toggle-handle"></div>
-              </div>
-            </div>
-          </div>
-          <button id="continue-to-step-4" class="secondary">Done, continue</button>
-        </div>
-      </div>
-
-      <!-- Step 4: Load Unpacked -->
-      <div class="step" id="step-4">
-        <div class="step-header">
-          <span class="step-number">4</span>
-          <h2>Load the Extension</h2>
-        </div>
-        <div class="step-content">
-          <p>1. Click the "Load unpacked" button that appeared</p>
-          <p>2. Navigate to your Downloads folder</p>
-          <p>3. Select the extracted extension folder</p>
 
           <div class="path-box">
-            <label>Extension folder path:</label>
+            <label>Downloaded file:</label>
             <div class="path-input">
-              <input type="text" id="extension-path" readonly>
-              <button id="copy-path">Copy</button>
+              <input type="text" id="download-path" readonly>
+              <button id="open-downloads" class="btn icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </button>
             </div>
           </div>
 
-          <div class="note">
-            <strong>Note:</strong> You may need to extract the downloaded ZIP file first.
-            Look for a folder named after the extension in your Downloads.
-          </div>
+          <button id="continue-to-step-3" class="btn primary full-width">I've Extracted It</button>
         </div>
       </div>
 
-      <!-- Step 5: Complete -->
-      <div class="step" id="step-5">
-        <div class="step-header">
-          <span class="step-number">✓</span>
-          <h2>Installation Complete!</h2>
+      <!-- Step 3: Install -->
+      <div class="step" id="step-3">
+        <div class="step-card">
+          <div class="step-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+          </div>
+          <h2>Load in Chrome</h2>
+          <p>Now let's add the extension to Chrome.</p>
+
+          <div class="instruction-box">
+            <div class="instruction-step clickable" id="open-extensions">
+              <span class="instruction-num">1</span>
+              <span>Click to open <strong>chrome://extensions</strong></span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+            </div>
+            <div class="instruction-step">
+              <span class="instruction-num">2</span>
+              <span>Enable <strong>Developer mode</strong> (top right toggle)</span>
+            </div>
+            <div class="instruction-step">
+              <span class="instruction-num">3</span>
+              <span>Click <strong>Load unpacked</strong></span>
+            </div>
+            <div class="instruction-step">
+              <span class="instruction-num">4</span>
+              <span>Select the extracted extension folder</span>
+            </div>
+          </div>
+
+          <div class="path-box">
+            <label>Extension folder to select:</label>
+            <div class="path-input">
+              <input type="text" id="extension-path" readonly>
+              <button id="copy-path" class="btn icon" title="Copy path">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="visual-guide">
+            <div class="guide-item">
+              <div class="toggle-demo">
+                <span>Developer mode</span>
+                <div class="toggle">
+                  <div class="toggle-handle"></div>
+                </div>
+              </div>
+              <small>Enable this toggle</small>
+            </div>
+          </div>
+
+          <button id="continue-to-step-4" class="btn primary full-width">I've Loaded It</button>
         </div>
-        <div class="step-content">
-          <p class="success-text">The extension should now be installed and active.</p>
-          <p>You can close this tab and return to Extension Pack Hub.</p>
-          <button id="close-wizard" class="primary">Close</button>
+      </div>
+
+      <!-- Step 4: Complete -->
+      <div class="step" id="step-4">
+        <div class="step-card success-card">
+          <div class="step-icon success">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </div>
+          <h2>All Done!</h2>
+          <p class="success-text">The extension has been installed successfully.</p>
+          <p>You can now close this tab and enjoy your new extension.</p>
+
+          <div class="completion-actions">
+            <button id="close-wizard" class="btn primary">Close Tab</button>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="warnings" id="warnings-container"></div>
+
+    <footer>
+      <p>Extension Pack Hub</p>
+    </footer>
   </div>
 
   <script src="../lib/github-api.js"></script>

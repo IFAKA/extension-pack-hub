@@ -12,7 +12,7 @@
     <!-- Landing View (no pack in URL) -->
     <div id="landing" class="view active">
       <header>
-        <h1>📦 Extension Pack Hub</h1>
+        <h1>Extension Pack Hub</h1>
         <p class="tagline">Create, share, and install browser extension packs</p>
       </header>
 
@@ -24,24 +24,24 @@
 
             <div class="features">
               <div class="feature">
-                <span class="feature-icon">🎯</span>
+                <span class="feature-icon">+</span>
                 <h3>Create Packs</h3>
                 <p>Select from your installed extensions and create a shareable pack</p>
               </div>
               <div class="feature">
-                <span class="feature-icon">🔗</span>
+                <span class="feature-icon">#</span>
                 <h3>Share Easily</h3>
-                <p>Everything is encoded in the URL — no accounts needed</p>
+                <p>Everything is encoded in the URL - no accounts needed</p>
               </div>
               <div class="feature">
-                <span class="feature-icon">🔒</span>
+                <span class="feature-icon">*</span>
                 <h3>Stay Safe</h3>
                 <p>Store extensions verified by Chrome, GitHub ones are open source</p>
               </div>
             </div>
 
             <div class="cta">
-              <a href="https://github.com/IFAKA/extension-pack-hub" target="_blank" class="btn primary">Get the Extension</a>
+              <a href="https://github.com/IFAKA/extension-pack-hub" target="_blank" class="btn primary" id="get-extension">Get the Extension</a>
               <p class="cta-note">Required to create packs</p>
             </div>
           </div>
@@ -64,7 +64,7 @@
     <!-- Pack View (pack in URL) -->
     <div id="pack-view" class="view">
       <header>
-        <a href="./" class="back-link">← Extension Pack Hub</a>
+        <a href="./" class="back-link">Back to Extension Pack Hub</a>
       </header>
 
       <div class="main-content">
@@ -83,9 +83,11 @@
           <div class="extension-list" id="extension-list"></div>
 
           <div class="pack-actions">
+            <div class="companion-prompt" id="companion-prompt">
+              <p>For the best experience, get the Extension Pack Hub companion extension:</p>
+              <a href="https://github.com/IFAKA/extension-pack-hub" target="_blank" class="btn secondary" id="get-companion">Get Companion Extension</a>
+            </div>
             <button id="install-all" class="btn primary">Install All Extensions</button>
-            <div class="divider"><span>opens Chrome Web Store pages</span></div>
-            <a href="https://github.com/IFAKA/extension-pack-hub" target="_blank" class="btn secondary">Get Companion Extension</a>
           </div>
         </div>
 
@@ -108,7 +110,7 @@
     <!-- Error View -->
     <div id="error-view" class="view">
       <header>
-        <a href="./" class="back-link">← Extension Pack Hub</a>
+        <a href="./" class="back-link">Back to Extension Pack Hub</a>
       </header>
 
       <div class="main-content" style="justify-content: center;">

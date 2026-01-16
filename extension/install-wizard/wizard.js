@@ -1,5 +1,6 @@
 /**
  * Extension Pack Hub - Install Wizard
+ * Guides users through installing GitHub extensions
  */
 
 // Get URL parameters
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
   // Display extension name
-  document.getElementById('extension-name').textContent = extensionName || 'Unknown Extension';
+  document.getElementById('extension-name').textContent = extensionName || 'Extension';
 
   // Setup event listeners
   setupEventListeners();
@@ -32,11 +33,17 @@ async function init() {
 
 function setupEventListeners() {
   document.getElementById('continue-to-step-2').addEventListener('click', () => goToStep(2));
-  document.getElementById('open-extensions').addEventListener('click', openExtensionsPage);
   document.getElementById('continue-to-step-3').addEventListener('click', () => goToStep(3));
   document.getElementById('continue-to-step-4').addEventListener('click', () => goToStep(4));
+
+  document.getElementById('open-extensions').addEventListener('click', openExtensionsPage);
   document.getElementById('copy-path').addEventListener('click', copyPath);
   document.getElementById('close-wizard').addEventListener('click', () => window.close());
+
+  // Open downloads folder
+  document.getElementById('open-downloads')?.addEventListener('click', () => {
+    chrome.downloads.showDefaultFolder();
+  });
 }
 
 async function startDownload() {
@@ -76,7 +83,6 @@ async function startDownload() {
 
     // Trigger download
     const filename = `${repoName}-${release.tag_name}.zip`;
-    downloadPath = `~/Downloads/${filename}`;
 
     chrome.runtime.sendMessage({
       type: 'download-extension',
@@ -114,8 +120,16 @@ function listenForDownloadComplete(downloadId) {
           progressEl.style.width = '100%';
           statusEl.textContent = 'Download complete!';
           downloadPath = download.filename;
+
+          // Set paths in UI
+          document.getElementById('download-path').value = downloadPath;
           document.getElementById('extension-path').value = getExtractPath(downloadPath);
+
           document.getElementById('download-success').classList.remove('hidden');
+
+          // Remove downloading animation
+          document.querySelector('.step-icon.downloading')?.classList.remove('downloading');
+
         } else if (download.state === 'interrupted') {
           clearInterval(checkStatus);
           showError(`Download interrupted: ${download.error}`);
@@ -139,8 +153,24 @@ function getExtractPath(zipPath) {
 
 function showError(message) {
   const errorEl = document.getElementById('download-error');
-  errorEl.textContent = message;
+  const errorTextEl = document.getElementById('error-text');
+
+  if (errorTextEl) {
+    errorTextEl.textContent = message;
+  } else {
+    errorEl.innerHTML = `
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="15" y1="9" x2="9" y2="15"></line>
+        <line x1="9" y1="9" x2="15" y2="15"></line>
+      </svg>
+      <span>${message}</span>
+    `;
+  }
   errorEl.classList.remove('hidden');
+
+  // Remove downloading animation
+  document.querySelector('.step-icon.downloading')?.classList.remove('downloading');
 }
 
 function showWarnings(warnings) {
@@ -157,18 +187,29 @@ function showWarnings(warnings) {
 }
 
 function goToStep(stepNum) {
-  // Mark current step as completed
+  // Hide current step
   document.getElementById(`step-${currentStep}`).classList.remove('active');
-  document.getElementById(`step-${currentStep}`).classList.add('completed');
 
-  // Activate new step
+  // Update progress indicator
+  const progressSteps = document.querySelectorAll('.progress-step');
+  const progressLines = document.querySelectorAll('.progress-line');
+
+  // Mark completed steps
+  for (let i = 1; i < stepNum; i++) {
+    progressSteps[i - 1].classList.add('completed');
+    progressSteps[i - 1].classList.remove('active');
+    if (progressLines[i - 1]) {
+      progressLines[i - 1].classList.add('active');
+    }
+  }
+
+  // Mark current step as active
+  progressSteps[stepNum - 1].classList.add('active');
+  progressSteps[stepNum - 1].classList.remove('completed');
+
+  // Show new step
   currentStep = stepNum;
   document.getElementById(`step-${currentStep}`).classList.add('active');
-
-  // If last step, show completion
-  if (stepNum === 5) {
-    document.getElementById('step-5').classList.add('active');
-  }
 }
 
 function openExtensionsPage() {
@@ -179,7 +220,16 @@ function copyPath() {
   const pathInput = document.getElementById('extension-path');
   navigator.clipboard.writeText(pathInput.value).then(() => {
     const btn = document.getElementById('copy-path');
-    btn.textContent = 'Copied!';
-    setTimeout(() => btn.textContent = 'Copy', 2000);
+    const originalHTML = btn.innerHTML;
+    btn.innerHTML = `
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    `;
+    btn.style.background = '#e8f5e9';
+    setTimeout(() => {
+      btn.innerHTML = originalHTML;
+      btn.style.background = '';
+    }, 2000);
   });
 }
