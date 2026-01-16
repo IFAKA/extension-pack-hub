@@ -332,11 +332,25 @@ async function renderImportedPack(pack) {
   const listEl = document.getElementById('imported-extension-list');
   const installedIds = new Set(installedExtensions.map(e => e.id));
 
+  // Get GitHub extension map to check for installed GitHub extensions
+  const githubExtensionMap = await getGitHubExtensionMap();
+
   let html = '';
   let missingCount = 0;
 
   for (const ext of pack.extensions) {
-    const isInstalled = ext.type === 'store' && installedIds.has(ext.id);
+    let isInstalled = false;
+
+    if (ext.type === 'store') {
+      isInstalled = installedIds.has(ext.id);
+    } else if (ext.type === 'github' && ext.repo) {
+      // Check if this GitHub extension is tracked as installed
+      const mapping = githubExtensionMap[ext.repo];
+      if (mapping && installedIds.has(mapping.id)) {
+        isInstalled = true;
+      }
+    }
+
     if (!isInstalled) missingCount++;
 
     let warnings = [];
@@ -394,11 +408,20 @@ async function installMissing() {
   if (!currentPack) return;
 
   const installedIds = new Set(installedExtensions.map(e => e.id));
+  const githubExtensionMap = await getGitHubExtensionMap();
+
   const missing = currentPack.extensions.filter(ext => {
     if (ext.type === 'store') {
       return !installedIds.has(ext.id);
     }
-    return true; // GitHub extensions always need action
+    if (ext.type === 'github' && ext.repo) {
+      // Check if this GitHub extension is tracked as installed
+      const mapping = githubExtensionMap[ext.repo];
+      if (mapping && installedIds.has(mapping.id)) {
+        return false; // Already installed, skip
+      }
+    }
+    return true; // Not installed, needs action
   });
 
   if (missing.length === 0) {
@@ -494,6 +517,15 @@ async function loadSavedPacks() {
         // Switch to import tab
         tabs[1].click();
       }
+    });
+  });
+}
+
+// Get GitHub extension map from background
+async function getGitHubExtensionMap() {
+  return new Promise((resolve) => {
+    chrome.runtime.sendMessage({ type: 'get-github-extension-map' }, (response) => {
+      resolve(response?.map || {});
     });
   });
 }

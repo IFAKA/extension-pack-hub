@@ -54,6 +54,13 @@ async function startDownload() {
     // Parse repo
     const { owner, repo: repoName } = GitHubAPI.parseRepo(repo);
 
+    // Register this as a pending GitHub install so we can track when it's loaded
+    chrome.runtime.sendMessage({
+      type: 'register-pending-github-install',
+      repo: repo,
+      name: extensionName || repoName
+    });
+
     // Update status
     statusEl.textContent = 'Fetching release info...';
     progressEl.style.width = '20%';
