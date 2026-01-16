@@ -134,10 +134,37 @@ function toggleExtension(id) {
 // Update selected count
 function updateSelectedCount() {
   const countEl = document.getElementById('selected-count');
-  const createBtn = document.getElementById('create-pack');
+  const nextBtn = document.getElementById('next-to-step-2');
 
   countEl.textContent = `${selectedExtensions.size} selected`;
-  createBtn.disabled = selectedExtensions.size === 0;
+  nextBtn.disabled = selectedExtensions.size === 0;
+}
+
+// Wizard step navigation
+function goToStep(stepNumber) {
+  document.querySelectorAll('.wizard-step').forEach(step => {
+    step.classList.remove('active');
+  });
+  document.getElementById(`step-${stepNumber}`).classList.add('active');
+}
+
+// Update create button state based on pack name
+function updateCreateButtonState() {
+  const packName = document.getElementById('pack-name').value.trim();
+  const createBtn = document.getElementById('create-pack');
+  createBtn.disabled = packName.length === 0;
+}
+
+// Reset wizard to initial state
+function resetWizard() {
+  selectedExtensions.clear();
+  document.getElementById('pack-name').value = '';
+  document.getElementById('pack-description').value = '';
+  document.getElementById('pack-author').value = '';
+  document.getElementById('search-extensions').value = '';
+  renderExtensionList(installedExtensions);
+  updateSelectedCount();
+  goToStep(1);
 }
 
 // Setup event listeners
@@ -150,6 +177,21 @@ function setupEventListeners() {
     );
     renderExtensionList(filtered);
   });
+
+  // Wizard navigation
+  document.getElementById('next-to-step-2').addEventListener('click', () => {
+    goToStep(2);
+    updateCreateButtonState();
+  });
+
+  document.getElementById('back-to-step-1').addEventListener('click', () => {
+    goToStep(1);
+  });
+
+  document.getElementById('create-another').addEventListener('click', resetWizard);
+
+  // Pack name input - enable/disable create button
+  document.getElementById('pack-name').addEventListener('input', updateCreateButtonState);
 
   // Create pack
   document.getElementById('create-pack').addEventListener('click', createPack);
@@ -170,13 +212,8 @@ async function createPack() {
   const description = document.getElementById('pack-description').value.trim();
   const author = document.getElementById('pack-author').value.trim();
 
-  if (!name) {
-    alert('Please enter a pack name');
-    return;
-  }
-
-  if (selectedExtensions.size === 0) {
-    alert('Please select at least one extension');
+  // These checks are now enforced by the UI, but keep as safety net
+  if (!name || selectedExtensions.size === 0) {
     return;
   }
 
@@ -229,9 +266,9 @@ async function createPack() {
   // Generate URL
   const url = PackCodec.generateUrl(pack);
 
-  // Show result
+  // Show result - go to step 3
   document.getElementById('share-url').value = url;
-  document.getElementById('share-result').classList.remove('hidden');
+  goToStep(3);
 
   // Save to storage
   savePack(pack, url);

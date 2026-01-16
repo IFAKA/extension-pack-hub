@@ -92,6 +92,19 @@ body {
   display: flex;
 }
 
+/* Wizard Steps */
+.wizard-step {
+  display: none;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.wizard-step.active {
+  display: flex;
+}
+
 /* Forms */
 .pack-form {
   display: flex;
@@ -293,6 +306,7 @@ textarea {
 .actions {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 8px;
   flex-shrink: 0;
 }
@@ -343,7 +357,6 @@ button.secondary:hover {
   background: var(--success-soft);
   padding: 12px;
   border-radius: var(--radius-md);
-  margin-top: 12px;
   flex-shrink: 0;
 }
 

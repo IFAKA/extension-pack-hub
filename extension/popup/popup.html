@@ -16,31 +16,53 @@
 
     <!-- Create Pack Tab -->
     <section id="create" class="tab-content active">
-      <div class="pack-form">
-        <input type="text" id="pack-name" placeholder="Pack name (e.g., Privacy Essentials)">
-        <textarea id="pack-description" placeholder="Description (optional)"></textarea>
-        <input type="text" id="pack-author" placeholder="Your name (optional)">
+      <!-- Step 1: Select Extensions -->
+      <div id="step-1" class="wizard-step active">
+        <div class="section-header">
+          <h3>Select Extensions</h3>
+          <input type="text" id="search-extensions" placeholder="Search...">
+        </div>
+
+        <div id="extension-list" class="extension-list">
+          <div class="loading">Loading extensions...</div>
+        </div>
+
+        <div class="actions">
+          <span id="selected-count">0 selected</span>
+          <button id="next-to-step-2" class="primary" disabled>Next</button>
+        </div>
       </div>
 
-      <div class="section-header">
-        <h3>Your Extensions</h3>
-        <input type="text" id="search-extensions" placeholder="Search...">
+      <!-- Step 2: Pack Details -->
+      <div id="step-2" class="wizard-step">
+        <div class="section-header">
+          <h3>Pack Details</h3>
+        </div>
+
+        <div class="pack-form">
+          <input type="text" id="pack-name" placeholder="Pack name (e.g., Privacy Essentials)" required>
+          <textarea id="pack-description" placeholder="Description (optional)"></textarea>
+          <input type="text" id="pack-author" placeholder="Your name (optional)">
+        </div>
+
+        <div class="actions">
+          <button id="back-to-step-1" class="secondary">Back</button>
+          <button id="create-pack" class="primary" disabled>Create Pack</button>
+        </div>
       </div>
 
-      <div id="extension-list" class="extension-list">
-        <div class="loading">Loading extensions...</div>
-      </div>
+      <!-- Step 3: Share Result -->
+      <div id="step-3" class="wizard-step">
+        <div id="share-result" class="share-result">
+          <p>Pack created! Share this URL:</p>
+          <div class="url-box">
+            <input type="text" id="share-url" readonly>
+            <button id="copy-url">Copy</button>
+          </div>
+        </div>
 
-      <div class="actions">
-        <button id="create-pack" class="primary" disabled>Create Pack</button>
-        <span id="selected-count">0 selected</span>
-      </div>
-
-      <div id="share-result" class="share-result hidden">
-        <p>Pack created! Share this URL:</p>
-        <div class="url-box">
-          <input type="text" id="share-url" readonly>
-          <button id="copy-url">Copy</button>
+        <div class="actions">
+          <button id="create-another" class="secondary">Create Another</button>
         </div>
       </div>
     </section>
