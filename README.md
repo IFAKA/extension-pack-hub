@@ -174,6 +174,87 @@ git clone https://github.com/IFAKA/extension-pack-hub.git
 cd docs && python -m http.server 8000
 ```
 
+## 🔌 For Extension Developers
+
+Want your extension to be installable via Extension Pack Hub? Follow these steps to make your GitHub-hosted extension compatible.
+
+### Requirements
+
+| Requirement | Description |
+|-------------|-------------|
+| ✅ Public repository | Private repos are not supported |
+| ✅ GitHub Release | You must create a release (pushing code alone isn't enough) |
+| ✅ Valid manifest.json | Standard Chrome extension manifest at the root |
+
+### Creating a Compatible Release
+
+#### Option 1: Attach a ZIP file (Recommended)
+
+Create a `.zip` file with your extension files and `manifest.json` at the **root level**:
+
+```
+my-extension.zip
+├── manifest.json      ← Must be at root
+├── background.js
+├── popup/
+│   ├── popup.html
+│   └── popup.js
+└── icons/
+```
+
+Then create a release with the zip attached:
+
+```bash
+# Create your zip (manifest.json must be at root)
+zip -r my-extension.zip manifest.json background.js popup/ icons/
+
+# Create a GitHub release with the zip
+gh release create v1.0.0 my-extension.zip \
+  --title "My Extension v1.0.0" \
+  --notes "Release notes here"
+```
+
+#### Option 2: Use GitHub's automatic zipball
+
+If your repository root **is** your extension (manifest.json at repo root), you can create a release without attaching files:
+
+```bash
+gh release create v1.0.0 --title "v1.0.0" --notes "Release notes"
+```
+
+The install wizard will use GitHub's automatic zipball. Note: users will need to navigate into the extracted folder (e.g., `owner-repo-v1.0.0/`) when loading the extension.
+
+### Testing Your Release
+
+1. Create your release on GitHub
+2. Create a test pack with your extension:
+   ```json
+   {
+     "type": "github",
+     "repo": "your-username/your-repo",
+     "name": "Your Extension",
+     "releaseTag": "v1.0.0"
+   }
+   ```
+3. Try installing via Extension Pack Hub
+4. Verify the download works and the extension loads correctly
+
+### Troubleshooting
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| 404 when fetching release | No releases exist | Create a GitHub Release |
+| Download fails | Private repository | Make the repository public |
+| Extension won't load | manifest.json not at root | Restructure your zip file |
+| Permission warnings | Sensitive permissions detected | Expected behavior - warns users |
+
+### Best Practices
+
+- **Use semantic versioning** for release tags (e.g., `v1.0.0`, `v1.2.3`)
+- **Include release notes** describing what's in each version
+- **Test your release** before sharing pack URLs
+- **Keep manifest.json at root** of your zip for seamless loading
+
 ## 📋 Roadmap
 
 - [ ] Firefox support

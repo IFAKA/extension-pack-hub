@@ -5,31 +5,39 @@
 }
 
 :root {
-  --primary: #1a73e8;
-  --primary-dark: #1557b0;
-  --success: #2e7d32;
-  --success-light: #e8f5e9;
-  --warning: #e65100;
-  --error: #c62828;
-  --text: #1a1a1a;
-  --text-light: #666;
-  --bg: #f5f5f5;
-  --card: #fff;
-  --border: #e0e0e0;
+  --text: #111;
+  --text-secondary: #666;
+  --text-tertiary: #999;
+  --bg: #fafafa;
+  --bg-card: #fff;
+  --border: #e5e5e5;
+  --accent: #111;
+  --accent-soft: #f5f5f5;
+  --success: #22c55e;
+  --success-soft: #f0fdf4;
+  --warning: #f59e0b;
+  --warning-soft: #fffbeb;
+  --error: #ef4444;
+  --error-soft: #fef2f2;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-size: 15px;
   color: var(--text);
-  background: #f5f5f5;
+  background: var(--bg);
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
 }
 
 .wizard-container {
-  max-width: 560px;
+  max-width: 480px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 48px 24px;
 }
 
 /* Header */
@@ -42,29 +50,29 @@ header {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 80px;
-  height: 80px;
-  background: white;
-  border-radius: 20px;
+  width: 64px;
+  height: 64px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
   margin-bottom: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border: 1px solid var(--border);
 }
 
 .header-icon svg {
-  stroke: var(--primary);
+  stroke: var(--text);
 }
 
 header h1 {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   color: var(--text);
 }
 
 .extension-name {
-  font-size: 18px;
-  color: var(--primary);
-  font-weight: 500;
+  font-size: 16px;
+  color: var(--text-secondary);
+  font-weight: 400;
 }
 
 /* Progress Steps */
@@ -74,9 +82,9 @@ header h1 {
   justify-content: center;
   margin-bottom: 32px;
   padding: 16px 24px;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
 }
 
 .progress-step {
@@ -87,9 +95,11 @@ header h1 {
 }
 
 .progress-step span {
-  font-size: 12px;
-  color: #999;
+  font-size: 11px;
+  color: var(--text-tertiary);
   font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .progress-step.active span,
@@ -98,21 +108,21 @@ header h1 {
 }
 
 .step-dot {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  background: #e0e0e0;
-  color: #999;
+  background: var(--accent-soft);
+  color: var(--text-tertiary);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
-  font-size: 14px;
-  transition: all 0.3s ease;
+  font-size: 12px;
+  transition: all 0.2s ease;
 }
 
 .progress-step.active .step-dot {
-  background: var(--primary);
+  background: var(--accent);
   color: white;
 }
 
@@ -126,12 +136,12 @@ header h1 {
 }
 
 .progress-line {
-  width: 40px;
-  height: 2px;
-  background: #e0e0e0;
-  margin: 0 8px;
+  width: 32px;
+  height: 1px;
+  background: var(--border);
+  margin: 0 12px;
   margin-bottom: 20px;
-  transition: background 0.3s ease;
+  transition: background 0.2s ease;
 }
 
 .progress-line.active {
@@ -146,17 +156,17 @@ header h1 {
 
 .step {
   display: none;
-  animation: fadeInUp 0.4s ease;
+  animation: fadeIn 0.3s ease;
 }
 
 .step.active {
   display: block;
 }
 
-@keyframes fadeInUp {
+@keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -165,27 +175,28 @@ header h1 {
 }
 
 .step-card {
-  background: white;
-  border-radius: 20px;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
   padding: 32px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border);
   text-align: center;
 }
 
 .step-card.success-card {
-  background: #f8fdf8;
+  background: var(--success-soft);
+  border-color: transparent;
 }
 
 .step-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 64px;
-  height: 64px;
-  background: #f0f4ff;
-  border-radius: 16px;
+  width: 48px;
+  height: 48px;
+  background: var(--accent-soft);
+  border-radius: var(--radius-md);
   margin-bottom: 20px;
-  color: var(--primary);
+  color: var(--text);
 }
 
 .step-icon.downloading {
@@ -193,29 +204,29 @@ header h1 {
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
 }
 
 .step-icon.success {
-  background: var(--success-light);
-  color: var(--success);
-  width: 80px;
-  height: 80px;
+  background: var(--success);
+  color: white;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
 }
 
 .step-card h2 {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 600;
   margin-bottom: 8px;
   color: var(--text);
 }
 
 .step-card > p {
-  color: var(--text-light);
+  color: var(--text-secondary);
   margin-bottom: 24px;
-  line-height: 1.5;
+  font-size: 14px;
 }
 
 /* Progress */
@@ -224,24 +235,24 @@ header h1 {
 }
 
 .progress-bar {
-  height: 8px;
-  background: #e8e8e8;
-  border-radius: 4px;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
   overflow: hidden;
   margin-bottom: 12px;
 }
 
 .progress-fill {
   height: 100%;
-  background: var(--primary);
-  border-radius: 4px;
+  background: var(--accent);
+  border-radius: 2px;
   width: 0%;
   transition: width 0.3s ease;
 }
 
 .progress-text {
-  font-size: 14px;
-  color: var(--text-light);
+  font-size: 13px;
+  color: var(--text-secondary);
 }
 
 /* Messages */
@@ -250,11 +261,12 @@ header h1 {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: #ffebee;
+  background: var(--error-soft);
   color: var(--error);
-  padding: 16px;
-  border-radius: 12px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
   margin-top: 16px;
+  font-size: 14px;
 }
 
 .success-message {
@@ -262,10 +274,10 @@ header h1 {
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  background: var(--success-light);
+  background: var(--success-soft);
   color: var(--success);
   padding: 20px;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   margin-top: 16px;
   font-weight: 500;
 }
@@ -275,7 +287,7 @@ header h1 {
 }
 
 .success-text {
-  font-size: 18px;
+  font-size: 16px;
   color: var(--success);
   font-weight: 600;
 }
@@ -286,43 +298,42 @@ header h1 {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 14px 28px;
+  padding: 12px 24px;
   border: none;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: 600;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
 }
 
 .btn.primary {
-  background: var(--primary);
+  background: var(--accent);
   color: white;
 }
 
 .btn.primary:hover {
-  background: var(--primary-dark);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+  opacity: 0.85;
 }
 
 .btn.secondary {
-  background: #f1f3f4;
-  color: #3c4043;
+  background: var(--accent-soft);
+  color: var(--text);
+  border: 1px solid var(--border);
 }
 
 .btn.secondary:hover {
-  background: #e8eaed;
+  background: var(--border);
 }
 
 .btn.icon {
-  padding: 12px;
-  background: #f5f5f5;
-  border-radius: 8px;
+  padding: 10px;
+  background: var(--accent-soft);
+  border-radius: var(--radius-sm);
 }
 
 .btn.icon:hover {
-  background: #e8e8e8;
+  background: var(--border);
 }
 
 .btn.full-width {
@@ -332,8 +343,8 @@ header h1 {
 
 /* Instruction Box */
 .instruction-box {
-  background: #f8f9fa;
-  border-radius: 12px;
+  background: var(--accent-soft);
+  border-radius: var(--radius-md);
   padding: 4px;
   margin: 20px 0;
 }
@@ -342,9 +353,9 @@ header h1 {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px 16px;
-  border-radius: 10px;
-  transition: background 0.2s;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  transition: background 0.15s ease;
 }
 
 .instruction-step.clickable {
@@ -352,32 +363,32 @@ header h1 {
 }
 
 .instruction-step.clickable:hover {
-  background: #e8f0fe;
+  background: var(--bg-card);
 }
 
 .instruction-step.clickable svg {
   margin-left: auto;
-  color: var(--primary);
+  color: var(--text-secondary);
 }
 
 .instruction-num {
-  width: 28px;
-  height: 28px;
-  background: white;
-  border: 2px solid var(--border);
+  width: 24px;
+  height: 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
-  color: var(--text-light);
+  color: var(--text-secondary);
   flex-shrink: 0;
 }
 
 .instruction-step span:not(.instruction-num) {
   text-align: left;
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text);
 }
 
@@ -385,17 +396,19 @@ header h1 {
 .path-box {
   margin: 20px 0;
   padding: 16px;
-  background: #f8f9fa;
-  border-radius: 12px;
+  background: var(--accent-soft);
+  border-radius: var(--radius-md);
   text-align: left;
 }
 
 .path-box label {
   display: block;
-  font-size: 13px;
-  color: var(--text-light);
+  font-size: 11px;
+  color: var(--text-secondary);
   margin-bottom: 8px;
   font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .path-input {
@@ -405,21 +418,26 @@ header h1 {
 
 .path-input input {
   flex: 1;
-  padding: 12px 14px;
+  padding: 10px 12px;
   border: 1px solid var(--border);
-  border-radius: 8px;
-  font-family: 'SF Mono', Monaco, 'Courier New', monospace;
-  font-size: 13px;
-  background: white;
+  border-radius: var(--radius-sm);
+  font-family: 'SF Mono', Monaco, 'Fira Code', monospace;
+  font-size: 12px;
+  background: var(--bg-card);
   color: var(--text);
+}
+
+.path-input input:focus {
+  outline: none;
+  border-color: var(--text);
 }
 
 /* Visual Guide */
 .visual-guide {
   margin: 20px 0;
-  padding: 20px;
-  background: #fff8e1;
-  border-radius: 12px;
+  padding: 16px;
+  background: var(--warning-soft);
+  border-radius: var(--radius-md);
 }
 
 .guide-item {
@@ -430,7 +448,7 @@ header h1 {
 }
 
 .guide-item small {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--warning);
   font-weight: 500;
 }
@@ -440,36 +458,35 @@ header h1 {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 20px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 12px 16px;
+  background: var(--bg-card);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
 }
 
 .toggle-demo span {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
 }
 
 .toggle {
-  width: 48px;
-  height: 26px;
-  background: var(--primary);
-  border-radius: 13px;
+  width: 40px;
+  height: 22px;
+  background: var(--accent);
+  border-radius: 11px;
   position: relative;
   cursor: pointer;
 }
 
 .toggle-handle {
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   background: white;
   border-radius: 50%;
   position: absolute;
   top: 2px;
-  left: 24px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  transition: left 0.3s ease;
+  left: 20px;
+  transition: left 0.2s ease;
 }
 
 /* Completion Actions */
@@ -483,23 +500,22 @@ header h1 {
 }
 
 .warning-card {
-  background: #fff3e0;
-  border-left: 4px solid var(--warning);
-  border-radius: 12px;
-  padding: 16px 20px;
-  margin-bottom: 12px;
+  background: var(--warning-soft);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-bottom: 8px;
 }
 
 .warning-card h3 {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--warning);
   margin-bottom: 4px;
 }
 
 .warning-card p {
-  font-size: 14px;
-  color: #bf360c;
+  font-size: 13px;
+  color: var(--text-secondary);
   margin: 0;
 }
 
@@ -507,8 +523,17 @@ header h1 {
 footer {
   text-align: center;
   margin-top: 32px;
-  color: var(--text-light);
-  font-size: 14px;
+  color: var(--text-tertiary);
+  font-size: 13px;
+}
+
+footer a {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }
 
 /* Hidden */
@@ -517,13 +542,13 @@ footer {
 }
 
 /* Responsive */
-@media (max-width: 640px) {
+@media (max-width: 560px) {
   .wizard-container {
-    padding: 20px 16px;
+    padding: 32px 16px;
   }
 
   header h1 {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .step-card {
@@ -535,13 +560,14 @@ footer {
   }
 
   .step-dot {
-    width: 28px;
-    height: 28px;
-    font-size: 12px;
+    width: 24px;
+    height: 24px;
+    font-size: 11px;
   }
 
   .progress-line {
-    width: 24px;
+    width: 20px;
+    margin: 0 8px;
   }
 
   .progress-step span {
