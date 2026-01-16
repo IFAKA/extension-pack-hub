@@ -51,3 +51,7 @@ cd docs && python -m http.server 8000
 - Pack URLs: `https://ifaka.github.io/extension-pack-hub/#<base64-encoded-json>`
 - GitHub extensions show permission warnings by fetching manifest.json from the repo
 - The popup uses Chrome's `management` API to list installed extensions and detect store vs local installs
+
+## Workflow
+
+- Always commit changes after finishing a task
